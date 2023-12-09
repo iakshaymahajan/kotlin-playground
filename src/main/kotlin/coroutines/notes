@@ -1,0 +1,38 @@
+What is a Coroutine ?
+
+    Coroutines are lightweight threads that execute independently from other blocks of code.
+    These can be thought of as threads on top of the operating System threads.
+    With coroutines we can run heavy/time consuming operations in parallel concurrently.
+
+    A coroutine is run via a function with suspend keyword.
+    A suspend function could be called from a coroutine or another suspend function.
+
+What does suspend keyword do to a function ?
+
+    Technically a suspend keyword transforms the function into something that is non-blocking,
+    therefore running on another thread
+
+What is a coroutineScope ?
+
+    CoroutineScope is a wrapper over a suspend function which will start a "context" for a coroutine.
+    Things within one coroutineScope remains isolated from other coroutineScope.
+    What it means is - coroutineScope is nothing but a function.
+    Inorder to stop or finish the coroutineScope, all the coroutines inside the scope need to finish.
+
+            coroutineScope { //start a "context" for a coroutine.
+                bathTime()
+                // add more code, including calls to other suspend functions
+                // Things within one coroutineScope remains isolated from other coroutineScope
+                // parallel code here, all needs to finish before the scope is closed.
+            }
+    Inside a coroutineScope all the suspend functions are executed in sequence.
+
+What is launch inside a coroutineScope ?
+    Launch is nothing but a function that will start a new coroutine which will execute in parallel.
+    Launch returns a value i.e a Job.
+
+What is async inside a coroutineScope ?
+    Async is similar to launch i.e it will also start a new coroutine which will execute in parallel
+    but iy returns a value called Deferred (i.e similar to Future[T] in Scala)
+
+
